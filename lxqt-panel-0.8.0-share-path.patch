@@ -1,0 +1,47 @@
+diff -r -u lxqt-panel-0.8.0.orig/BuildPlugin.cmake lxqt-panel-0.8.0/BuildPlugin.cmake
+--- lxqt-panel-0.8.0.orig/BuildPlugin.cmake	2014-10-13 12:27:26.000000000 -0300
++++ lxqt-panel-0.8.0/BuildPlugin.cmake	2014-10-28 09:57:51.298289770 -0200
+@@ -1,8 +1,12 @@
+ MACRO (BUILD_LXQT_PLUGIN NAME)
+     set(PROGRAM "lxqt-panel")
+     project(${PROGRAM}_${NAME})
+-
+-    set(PROG_SHARE_DIR ${CMAKE_INSTALL_PREFIX}/share/lxqt/${PROGRAM})
++	
++	if(USE_QT5)
++		set(PROG_SHARE_DIR ${CMAKE_INSTALL_PREFIX}/share/lxqt-qt5/${PROGRAM})
++	else(USE_QT5)
++		set(PROG_SHARE_DIR ${CMAKE_INSTALL_PREFIX}/share/lxqt/${PROGRAM})
++	endif(USE_QT5)
+     set(PLUGIN_SHARE_DIR ${PROG_SHARE_DIR}/${NAME})
+ 
+     # Translations **********************************
+--- lxqt-panel-0.8.0.orig/panel/lxqtpanel.cpp	2014-10-13 12:27:26.000000000 -0300
++++ lxqt-panel-0.8.0/panel/lxqtpanel.cpp	2014-10-28 10:22:59.302419698 -0200
+@@ -273,6 +273,8 @@
+     QStringList dirs;
+     dirs << QString(getenv("LXQT_PANEL_PLUGINS_DIR")).split(':', QString::SkipEmptyParts);
+     dirs << QString("%1/%2").arg(XdgDirs::dataHome(), "/lxqt/lxqt-panel");
++    dirs << QString("%1/%2").arg(XdgDirs::dataHome(), "/lxqt-qt5/lxqt-panel");
++    qDebug() << dirs;
+     dirs << PLUGIN_DESKTOPS_DIR;
+     return dirs;
+ }
+--- lxqt-panel-0.8.0.orig/panel/CMakeLists.txt	2014-10-13 12:27:26.000000000 -0300
++++ lxqt-panel-0.8.0/panel/CMakeLists.txt	2014-10-28 10:42:00.484396607 -0200
+@@ -82,10 +82,11 @@
+ 
+ add_definitions(-DCOMPILE_LXQT_PANEL)
+ 
+-
+-set(PLUGIN_DESKTOPS_DIR
+-    ${CMAKE_INSTALL_PREFIX}/share/lxqt/${PROJECT}
+-)
++if(USE_QT5)
++	set(PLUGIN_DESKTOPS_DIR ${CMAKE_INSTALL_PREFIX}/share/lxqt-qt5/${PROJECT})
++else(USE_QT5)
++	set(PLUGIN_DESKTOPS_DIR ${CMAKE_INSTALL_PREFIX}/share/lxqt/${PROJECT})
++endif(USE_QT5)
+ 
+ add_definitions(-DPLUGIN_DESKTOPS_DIR=\"${PLUGIN_DESKTOPS_DIR}\")
+ 
