@@ -7,7 +7,7 @@
 Name:    lxqt-panel
 Summary: Main panel bar for LXQt desktop suite
 Version: 0.8.0
-Release: 5%{?dist}
+Release: 6%{?dist}
 License: LGPLv2+
 URL:     http://lxqt.org/
 Source0: http://lxqt.org/downloads/lxqt/0.8.0/%{name}-%{version}.tar.xz
@@ -39,7 +39,6 @@ BuildRequires: desktop-file-utils
 
 Requires: lxqt-runner >= %{version}
 Requires: lxqt-common >= 0.8.0
-Requires: xscreensaver-base
 
 %description
 %{summary}.
@@ -88,6 +87,9 @@ done
 %{_includedir}/lxqt
 
 %changelog
+* Tue Dec 16 2014 Helio Chissini de Castro <hcastro@redhat.com> - 0.8.0-6
+- Wrong requires of xscreensaver-base. Should be handled but xdg-utils
+
 * Mon Nov 10 2014 Helio Chissini de Castro <hcastro@redhat.com> - 0.8.0-5
 - Fix missing item on  https://bugzilla.redhat.com/show_bug.cgi?id=1159873 - dir ownership
 
