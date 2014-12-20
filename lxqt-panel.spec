@@ -7,11 +7,11 @@
 Name:    lxqt-panel
 Summary: Main panel bar for LXQt desktop suite
 Version: 0.8.0
-Release: 6%{?dist}
+Release: 7%{?dist}
 License: LGPLv2+
 URL:     http://lxqt.org/
 Source0: http://lxqt.org/downloads/lxqt/0.8.0/%{name}-%{version}.tar.xz
-Patch0:  lxqt-panel-0.8.0-share-path.patch
+Patch0:  lxqt-panel-0.8.0-unify.patch
 Patch1:  lxqt-panel-0.8.0-desktop-files.patch
 # https://github.com/lxde/lxde-qt/issues/288
 Patch100: lxqt-panel-0.8.0-undefined-references.patch
@@ -20,10 +20,10 @@ Patch101: lxqt-panel-0.8.0-lxqtmount-includes.patch
 BuildRequires: %{cmake_pkg} >= 2.8.9
 BuildRequires: pkgconfig(Qt5Help)
 BuildRequires: pkgconfig(Qt5Xdg) >= 1.0.0
-BuildRequires: pkgconfig(lxqt-qt5)
-BuildRequires: pkgconfig(lxqtmount-qt5)
-BuildRequires: pkgconfig(lxqt-globalkeys-qt5)
-BuildRequires: pkgconfig(lxqt-globalkeys-ui-qt5)
+BuildRequires: pkgconfig(lxqt)
+BuildRequires: pkgconfig(lxqtmount)
+BuildRequires: pkgconfig(lxqt-globalkeys)
+BuildRequires: pkgconfig(lxqt-globalkeys-ui)
 BuildRequires: pkgconfig(xcb)
 BuildRequires: pkgconfig(xcb-damage)
 BuildRequires: pkgconfig(xcb-xkb)
@@ -52,9 +52,8 @@ Requires: %{name} = %{version}-%{release}
 
 %prep
 %setup
-
-%patch0 -p1 -b .datadir
-%patch1 -p1 -b .desktop_files
+%patch0 -p1 -b .unify
+%patch1 -p1 -b .desktp_patch
 %patch100 -p1 -b .upstream-references
 %patch101 -p1 -b .upstream-includes
 
@@ -69,7 +68,7 @@ make %{?_smp_mflags} -C %{_target_platform}
 %install
 make install/fast DESTDIR=%{buildroot} -C %{_target_platform}
 
-for desktop in %{buildroot}/%{_datadir}/lxqt-qt5/lxqt-panel/*.desktop; do
+for desktop in %{buildroot}/%{_datadir}/lxqt/lxqt-panel/*.desktop; do
 	# Exclude category as been Service 
 	desktop-file-edit --remove-category=LXQt --remove-only-show-in=LXQt --add-only-show-in=X-LXQt ${desktop}
 done
@@ -79,7 +78,7 @@ done
 %{_bindir}/lxqt-panel
 %dir %{_libdir}/lxqt-panel
 %{_libdir}/lxqt-panel/*.so
-%{_datadir}/lxqt-qt5
+%{_datadir}/lxqt
 %dir %{_sysconfdir}/xdg/lxqt
 %config(noreplace) %{_sysconfdir}/xdg/lxqt/panel.conf
 
@@ -87,6 +86,9 @@ done
 %{_includedir}/lxqt
 
 %changelog
+* Sat Dec 20 2014 Helio Chissini de Castro <hcastro@redhat.com> - 0.8.0-7
+- Unify naming as discussed on Fedora IRC
+
 * Tue Dec 16 2014 Helio Chissini de Castro <hcastro@redhat.com> - 0.8.0-6
 - Wrong requires of xscreensaver-base. Should be handled but xdg-utils
 
