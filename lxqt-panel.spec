@@ -7,7 +7,7 @@
 Name:    lxqt-panel
 Summary: Main panel bar for LXQt desktop suite
 Version: 0.8.0
-Release: 7%{?dist}
+Release: 8%{?dist}
 License: LGPLv2+
 URL:     http://lxqt.org/
 Source0: http://lxqt.org/downloads/lxqt/0.8.0/%{name}-%{version}.tar.xz
@@ -86,6 +86,9 @@ done
 %{_includedir}/lxqt
 
 %changelog
+* Mon Dec 29 2014 Helio Chissini de Castro <hcastro@redhat.com> - 0.8.0-8
+- Rebuild against new Qt 5.4.0
+
 * Sat Dec 20 2014 Helio Chissini de Castro <hcastro@redhat.com> - 0.8.0-7
 - Unify naming as discussed on Fedora IRC
 
