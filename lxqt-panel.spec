@@ -1,23 +1,13 @@
-%if 0%{?rhel} == 6
-%define cmake_pkg cmake28
-%else
-%define cmake_pkg cmake
-%endif
-
 Name:    lxqt-panel
 Summary: Main panel bar for LXQt desktop suite
-Version: 0.8.0
-Release: 8%{?dist}
+Version: 0.9.0
+Release: 1%{?dist}
 License: LGPLv2+
 URL:     http://lxqt.org/
-Source0: http://lxqt.org/downloads/lxqt/0.8.0/%{name}-%{version}.tar.xz
-Patch0:  lxqt-panel-0.8.0-unify.patch
-Patch1:  lxqt-panel-0.8.0-desktop-files.patch
-# https://github.com/lxde/lxde-qt/issues/288
-Patch100: lxqt-panel-0.8.0-undefined-references.patch
-Patch101: lxqt-panel-0.8.0-lxqtmount-includes.patch
+Source0: http://downloads.lxqt.org/lxqt/0.9.0/lxqt-panel-0.9.0.tar.xz
+Patch0:  lxqt-panel-0.8.0-lxqtmount-includes.patch
 
-BuildRequires: %{cmake_pkg} >= 2.8.9
+BuildRequires: cmake >= 2.8.9
 BuildRequires: pkgconfig(Qt5Help)
 BuildRequires: pkgconfig(Qt5Xdg) >= 1.0.0
 BuildRequires: pkgconfig(lxqt)
@@ -27,6 +17,7 @@ BuildRequires: pkgconfig(lxqt-globalkeys-ui)
 BuildRequires: pkgconfig(xcb)
 BuildRequires: pkgconfig(xcb-damage)
 BuildRequires: pkgconfig(xcb-xkb)
+BuildRequires: pkgconfig(xcb-util)
 BuildRequires: pkgconfig(x11)
 BuildRequires: pkgconfig(libstatgrab)
 BuildRequires: pkgconfig(sysstat-qt5)
@@ -35,10 +26,12 @@ BuildRequires: pkgconfig(alsa)
 BuildRequires: pkgconfig(xrender)
 BuildRequires: pkgconfig(xcomposite)
 BuildRequires: pkgconfig(libmenu-cache)
+BuildRequires: kf5-kwindowsystem-devel >= 5.5
+BuildRequires: kf5-kguiaddons-devel >= 5.5.0 
 BuildRequires: desktop-file-utils
 
 Requires: lxqt-runner >= %{version}
-Requires: lxqt-common >= 0.8.0
+Requires: lxqt-common >= 0.9.0
 
 %description
 %{summary}.
@@ -52,15 +45,15 @@ Requires: %{name} = %{version}-%{release}
 
 %prep
 %setup
-%patch0 -p1 -b .unify
-%patch1 -p1 -b .desktp_patch
-%patch100 -p1 -b .upstream-references
-%patch101 -p1 -b .upstream-includes
+%patch0 -p1 -b .header
 
 %build
+rm plugin-mount/translations/mount_ru_RU.desktop
+rm plugin-networkmonitor/translations/networkmonitor_de_DE.desktop
+
 mkdir -p %{_target_platform}
 pushd %{_target_platform}
-%{?cmake28}%{!?cmake28:%{?cmake}} -DUSE_QT5=TRUE ..
+	%{cmake} ..
 popd
 
 make %{?_smp_mflags} -C %{_target_platform}
@@ -86,6 +79,12 @@ done
 %{_includedir}/lxqt
 
 %changelog
+* Sun Feb 08 2015 Helio Chissini de Castro <helio@kde.org> - 0.9.0-1
+- New upstream release 0.9.0
+
+* Tue Feb 03 2015 Helio Chissini de Castro <hcastro@redhat.com> - 0.9.0-0.1
+- Preparing 0.9.0 release
+
 * Mon Dec 29 2014 Helio Chissini de Castro <hcastro@redhat.com> - 0.8.0-8
 - Rebuild against new Qt 5.4.0
 
