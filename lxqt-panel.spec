@@ -1,7 +1,7 @@
 Name:    lxqt-panel
 Summary: Main panel bar for LXQt desktop suite
 Version: 0.9.0
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: LGPLv2+
 URL:     http://lxqt.org/
 Source0: http://downloads.lxqt.org/lxqt/0.9.0/lxqt-panel-0.9.0.tar.xz
@@ -32,6 +32,10 @@ BuildRequires: desktop-file-utils
 
 Requires: lxqt-runner >= %{version}
 Requires: lxqt-common >= 0.9.0
+
+%if 0%{?fedora} >= 22
+Obsoletes: razorqt-panel <= 0.5.2
+%endif
 
 %description
 %{summary}.
@@ -79,6 +83,9 @@ done
 %{_includedir}/lxqt
 
 %changelog
+* Tue Feb 10 2015 Helio Chissini de Castro <helio@kde.org> - 0.9.0-2
+- Obsoletes razorqt-panel as migrated to LXQt
+
 * Sun Feb 08 2015 Helio Chissini de Castro <helio@kde.org> - 0.9.0-1
 - New upstream release 0.9.0
 
