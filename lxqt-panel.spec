@@ -1,7 +1,7 @@
 Name:    lxqt-panel
 Summary: Main panel bar for LXQt desktop suite
 Version: 0.9.0
-Release: 6%{?dist}
+Release: 7%{?dist}
 License: LGPLv2+
 URL:     http://lxqt.org/
 Source0: http://downloads.lxqt.org/lxqt/0.9.0/lxqt-panel-0.9.0.tar.xz
@@ -85,6 +85,9 @@ done
 %{_includedir}/lxqt
 
 %changelog
+* Wed Jun 17 2015 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.9.0-7
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_23_Mass_Rebuild
+
 * Sat May 02 2015 Kalev Lember <kalevlember@gmail.com> - 0.9.0-6
 - Rebuilt for GCC 5 C++11 ABI change
 
