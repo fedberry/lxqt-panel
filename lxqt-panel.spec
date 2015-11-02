@@ -1,11 +1,11 @@
 Name:    lxqt-panel
 Summary: Main panel bar for LXQt desktop suite
-Version: 0.9.0
-Release: 8%{?dist}
+Version: 0.10.0
+Release: 1%{?dist}
 License: LGPLv2+
 URL:     http://lxqt.org/
-Source0: http://downloads.lxqt.org/lxqt/0.9.0/lxqt-panel-0.9.0.tar.xz
-Patch0:  lxqt-panel-0.8.0-lxqtmount-includes.patch
+Source0: http://downloads.lxqt.org/lxqt/%{version}/lxqt-panel-%{version}.tar.xz
+Patch0:  lxqt-panel-0.10.0-translations-fix.patch
 
 BuildRequires: cmake >= 2.8.9
 BuildRequires: pkgconfig(Qt5Help)
@@ -18,16 +18,21 @@ BuildRequires: pkgconfig(xcb)
 BuildRequires: pkgconfig(xcb-damage)
 BuildRequires: pkgconfig(xcb-xkb)
 BuildRequires: pkgconfig(xcb-util)
+BuildRequires: pkgconfig(xkbcommon)
+BuildRequires: pkgconfig(xkbcommon-x11)
 BuildRequires: pkgconfig(x11)
 BuildRequires: pkgconfig(libstatgrab)
 BuildRequires: pkgconfig(sysstat-qt5)
 BuildRequires: pkgconfig(libpulse)
+BuildRequires: pkgconfig(libmenu-cache)
 BuildRequires: pkgconfig(alsa)
 BuildRequires: pkgconfig(xrender)
 BuildRequires: pkgconfig(xcomposite)
 BuildRequires: pkgconfig(libmenu-cache)
-BuildRequires: kf5-kwindowsystem-devel >= 5.5
+BuildRequires: pkgconfig(dbusmenu-qt5)
+BuildRequires: kf5-kwindowsystem-devel >= 5.5.0
 BuildRequires: kf5-kguiaddons-devel >= 5.5.0 
+BuildRequires: kf5-solid-devel >= 5.5.0 
 BuildRequires: desktop-file-utils
 
 Requires: lxqt-runner >= %{version}
@@ -38,6 +43,7 @@ Obsoletes: razorqt-panel <= 0.5.2
 Obsoletes: razorqt-autosuspend <= 0.5.2
 Obsoletes: razorqt-appswitcher <= 0.5.2
 %endif
+Obsoletes: liblxqt-mount <= 0.10.0
 
 %description
 %{summary}.
@@ -45,17 +51,17 @@ Obsoletes: razorqt-appswitcher <= 0.5.2
 %package devel
 Summary:  Developer files for %{name}
 Requires: %{name} = %{version}-%{release}
+Obsoletes: liblxqt-mount-devel <= 0.10.0
 
 %description devel
 %{summary}.
 
 %prep
 %setup
-%patch0 -p1 -b .header
+%patch0 -p1 -b .translations
 
 %build
-rm plugin-mount/translations/mount_ru_RU.desktop
-rm plugin-networkmonitor/translations/networkmonitor_de_DE.desktop
+rm plugin-mount/translations/mount_ru.desktop 
 
 mkdir -p %{_target_platform}
 pushd %{_target_platform}
@@ -73,7 +79,6 @@ for desktop in %{buildroot}/%{_datadir}/lxqt/lxqt-panel/*.desktop; do
 done
 
 %files
-%doc COPYING
 %{_bindir}/lxqt-panel
 %dir %{_libdir}/lxqt-panel
 %{_libdir}/lxqt-panel/*.so
@@ -85,6 +90,9 @@ done
 %{_includedir}/lxqt
 
 %changelog
+* Mon Nov 02 2015 Helio Chissini de Castro <helio@kde.org> - 0.10.0-1
+- New upstream version
+
 * Thu Sep 17 2015 Helio Chissini de Castro <helio@kde.org> - 0.9.0-8
 - Rebuild due new libstatgrab soname.
 
