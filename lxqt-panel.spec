@@ -1,19 +1,15 @@
 Name:    lxqt-panel
 Summary: Main panel bar for LXQt desktop suite
 Version: 0.10.0
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: LGPLv2+
 URL:     http://lxqt.org/
 Source0: http://downloads.lxqt.org/lxqt/%{version}/lxqt-panel-%{version}.tar.xz
 Patch0:  lxqt-panel-0.10.0-translations-fix.patch
-
-BuildRequires: cmake >= 2.8.9
 BuildRequires: pkgconfig(Qt5Help)
 BuildRequires: pkgconfig(Qt5Xdg) >= 1.0.0
-BuildRequires: pkgconfig(lxqt)
-BuildRequires: pkgconfig(lxqtmount)
+BuildRequires: pkgconfig(lxqt) >= 0.10.1
 BuildRequires: pkgconfig(lxqt-globalkeys)
-BuildRequires: pkgconfig(lxqt-globalkeys-ui)
 BuildRequires: pkgconfig(xcb)
 BuildRequires: pkgconfig(xcb-damage)
 BuildRequires: pkgconfig(xcb-xkb)
@@ -28,21 +24,16 @@ BuildRequires: pkgconfig(libmenu-cache)
 BuildRequires: pkgconfig(alsa)
 BuildRequires: pkgconfig(xrender)
 BuildRequires: pkgconfig(xcomposite)
-BuildRequires: pkgconfig(libmenu-cache)
 BuildRequires: pkgconfig(dbusmenu-qt5)
 BuildRequires: kf5-kwindowsystem-devel >= 5.5.0
 BuildRequires: kf5-kguiaddons-devel >= 5.5.0 
 BuildRequires: kf5-solid-devel >= 5.5.0 
 BuildRequires: desktop-file-utils
-
-Requires: lxqt-runner >= %{version}
+Requires: lxqt-runner >= 0.10.0
 Requires: lxqt-common >= 0.9.0
-
-%if 0%{?fedora} >= 22
 Obsoletes: razorqt-panel <= 0.5.2
 Obsoletes: razorqt-autosuspend <= 0.5.2
 Obsoletes: razorqt-appswitcher <= 0.5.2
-%endif
 Obsoletes: liblxqt-mount <= 0.10.0
 
 %description
@@ -65,7 +56,7 @@ rm plugin-mount/translations/mount_ru.desktop
 
 mkdir -p %{_target_platform}
 pushd %{_target_platform}
-	%{cmake} ..
+	%{cmake_lxqt} ..
 popd
 
 make %{?_smp_mflags} -C %{_target_platform}
@@ -90,6 +81,9 @@ done
 %{_includedir}/lxqt
 
 %changelog
+* Thu Dec 10 2015 Helio Chissini de Castro <helio@kde.org> - 0.10.0-2
+- Use new cmake_lxqt infra
+
 * Mon Nov 02 2015 Helio Chissini de Castro <helio@kde.org> - 0.10.0-1
 - New upstream version
 
