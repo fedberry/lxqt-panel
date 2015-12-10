@@ -8,7 +8,7 @@ Source0: http://downloads.lxqt.org/lxqt/%{version}/lxqt-panel-%{version}.tar.xz
 Patch0:  lxqt-panel-0.10.0-translations-fix.patch
 BuildRequires: pkgconfig(Qt5Help)
 BuildRequires: pkgconfig(Qt5Xdg) >= 1.0.0
-BuildRequires: pkgconfig(lxqt) >= 0.10.1
+BuildRequires: pkgconfig(lxqt) >= 0.10.0
 BuildRequires: pkgconfig(lxqt-globalkeys)
 BuildRequires: pkgconfig(xcb)
 BuildRequires: pkgconfig(xcb-damage)
