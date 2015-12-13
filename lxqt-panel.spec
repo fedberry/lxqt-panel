@@ -1,7 +1,7 @@
 Name:    lxqt-panel
 Summary: Main panel bar for LXQt desktop suite
 Version: 0.10.0
-Release: 2%{?dist}
+Release: 3%{?dist}
 License: LGPLv2+
 URL:     http://lxqt.org/
 Source0: http://downloads.lxqt.org/lxqt/%{version}/lxqt-panel-%{version}.tar.xz
@@ -14,8 +14,10 @@ BuildRequires: pkgconfig(xcb)
 BuildRequires: pkgconfig(xcb-damage)
 BuildRequires: pkgconfig(xcb-xkb)
 BuildRequires: pkgconfig(xcb-util)
+%if 0%{?fedora} >= 22
 BuildRequires: pkgconfig(xkbcommon)
 BuildRequires: pkgconfig(xkbcommon-x11)
+%endif
 BuildRequires: pkgconfig(x11)
 BuildRequires: pkgconfig(libstatgrab)
 BuildRequires: pkgconfig(sysstat-qt5)
@@ -56,7 +58,11 @@ rm plugin-mount/translations/mount_ru.desktop
 
 mkdir -p %{_target_platform}
 pushd %{_target_platform}
-	%{cmake_lxqt} ..
+	%{cmake_lxqt} \
+	%if 0%{?rhel}
+		-DKBINDICATOR_PLUGIN:BOOL=FALSE \
+	%endif
+	..
 popd
 
 make %{?_smp_mflags} -C %{_target_platform}
@@ -81,6 +87,9 @@ done
 %{_includedir}/lxqt
 
 %changelog
+* Sun Dec 13 2015 Helio Chissini de Castro <helio@kde.org> - 0.10.0-3
+- Disable kbindicator under epel
+
 * Thu Dec 10 2015 Helio Chissini de Castro <helio@kde.org> - 0.10.0-2
 - Use new cmake_lxqt infra
 
