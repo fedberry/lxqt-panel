@@ -1,7 +1,7 @@
 Name:    lxqt-panel
 Summary: Main panel bar for LXQt desktop suite
 Version: 0.10.0
-Release: 3%{?dist}
+Release: 4%{?dist}
 License: LGPLv2+
 URL:     http://lxqt.org/
 Source0: http://downloads.lxqt.org/lxqt/%{version}/lxqt-panel-%{version}.tar.xz
@@ -33,9 +33,6 @@ BuildRequires: kf5-solid-devel >= 5.5.0
 BuildRequires: desktop-file-utils
 Requires: lxqt-runner >= 0.10.0
 Requires: lxqt-common >= 0.9.0
-Obsoletes: razorqt-panel <= 0.5.2
-Obsoletes: razorqt-autosuspend <= 0.5.2
-Obsoletes: razorqt-appswitcher <= 0.5.2
 Obsoletes: liblxqt-mount <= 0.10.0
 
 %description
@@ -87,6 +84,9 @@ done
 %{_includedir}/lxqt
 
 %changelog
+* Fri Jan 15 2016 Helio Chissini de Castro <helio@kde.org> - 0.10.0-4
+- Nor obsoletes razorqt anymore
+
 * Sun Dec 13 2015 Helio Chissini de Castro <helio@kde.org> - 0.10.0-3
 - Disable kbindicator under epel
 
