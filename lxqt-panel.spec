@@ -1,11 +1,13 @@
 Name:    lxqt-panel
 Summary: Main panel bar for LXQt desktop suite
 Version: 0.10.0
-Release: 5%{?dist}
+Release: 6%{?dist}
 License: LGPLv2+
 URL:     http://lxqt.org/
 Source0: http://downloads.lxqt.org/lxqt/%{version}/lxqt-panel-%{version}.tar.xz
 Patch0:  lxqt-panel-0.10.0-translations-fix.patch
+Patch1:  lxqt-panel-0.10.0-systtat.patch
+
 BuildRequires: pkgconfig(Qt5Help)
 BuildRequires: pkgconfig(Qt5Xdg) >= 1.0.0
 BuildRequires: pkgconfig(lxqt) >= 0.10.0
@@ -22,7 +24,9 @@ BuildRequires: pkgconfig(x11)
 BuildRequires: pkgconfig(libstatgrab)
 BuildRequires: pkgconfig(sysstat-qt5)
 BuildRequires: pkgconfig(libpulse)
+%if 0%{?fedora}
 BuildRequires: pkgconfig(libmenu-cache)
+%endif
 BuildRequires: pkgconfig(alsa)
 BuildRequires: pkgconfig(xrender)
 BuildRequires: pkgconfig(xcomposite)
@@ -49,6 +53,7 @@ Obsoletes: liblxqt-mount-devel <= 0.10.0
 %prep
 %setup
 %patch0 -p1 -b .translations
+%patch1 -p1 -b .sysstat
 
 %build
 rm plugin-mount/translations/mount_ru.desktop 
@@ -84,6 +89,9 @@ done
 %{_includedir}/lxqt
 
 %changelog
+* Tue May 24 2016 Than Ngo <than@redhat.com> 0.10.0-6
+- add rhel support
+
 * Thu Feb 04 2016 Fedora Release Engineering <releng@fedoraproject.org> - 0.10.0-5
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_24_Mass_Rebuild
 
