@@ -6,7 +6,6 @@ License: LGPLv2+
 URL:     http://lxqt.org/
 Source0: http://downloads.lxqt.org/lxqt/%{version}/lxqt-panel-%{version}.tar.xz
 Patch0:  lxqt-panel-0.10.0-translations-fix.patch
-Patch1:  lxqt-panel-0.10.0-systtat.patch
 
 BuildRequires: pkgconfig(Qt5Help)
 BuildRequires: pkgconfig(Qt5Xdg) >= 1.0.0
@@ -53,7 +52,6 @@ Obsoletes: liblxqt-mount-devel <= 0.10.0
 %prep
 %setup
 %patch0 -p1 -b .translations
-%patch1 -p1 -b .sysstat
 
 %build
 rm plugin-mount/translations/mount_ru.desktop 
