@@ -1,7 +1,7 @@
 Name:    lxqt-panel
 Summary: Main panel bar for LXQt desktop suite
 Version: 0.10.0
-Release: 6%{?dist}
+Release: 7%{?dist}
 License: LGPLv2+
 URL:     http://lxqt.org/
 Source0: http://downloads.lxqt.org/lxqt/%{version}/lxqt-panel-%{version}.tar.xz
@@ -36,6 +36,7 @@ BuildRequires: kf5-solid-devel >= 5.5.0
 BuildRequires: desktop-file-utils
 Requires: lxqt-runner >= 0.10.0
 Requires: lxqt-common >= 0.9.0
+Requires: xscreensaver-base
 Obsoletes: liblxqt-mount <= 0.10.0
 
 %description
@@ -87,6 +88,9 @@ done
 %{_includedir}/lxqt
 
 %changelog
+* Mon Sep 12 2016 Than Ngo <than@redhat.com> - 0.10.0-7
+- requires on xscreensaver-base for the case only lxqt desktop is installed
+
 * Tue May 24 2016 Than Ngo <than@redhat.com> 0.10.0-6
 - add rhel support
 
