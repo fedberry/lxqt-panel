@@ -1,10 +1,11 @@
 Name:    lxqt-panel
 Summary: Main panel bar for LXQt desktop suite
 Version: 0.11.1
-Release: 4%{?dist}
+Release: 5%{?dist}
 License: LGPLv2+
 URL:     http://lxqt.org/
 Source0: http://downloads.lxqt.org/lxqt/%{version}/%{name}-%{version}.tar.xz
+Patch0: 0001-panel.conf.patch
 BuildRequires: pkgconfig(Qt5Help)
 BuildRequires: pkgconfig(Qt5Xdg) >= 1.0.0
 BuildRequires: pkgconfig(lxqt) >= 0.11.0
@@ -83,6 +84,10 @@ done
 %{_includedir}/lxqt/*
 
 %changelog
+* Thu Apr 27 2017 Vaughan Agrez <devel at agrez dot net> - 0.11.1-5
+- Update panel defaults (Patch0)
+- Use %autosetup
+
 * Fri Feb 10 2017 Fedora Release Engineering <releng@fedoraproject.org> - 0.11.1-4
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_26_Mass_Rebuild
 
