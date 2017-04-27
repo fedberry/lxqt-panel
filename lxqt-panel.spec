@@ -46,7 +46,7 @@ Obsoletes: liblxqt-mount-devel <= 0.10.0
 %{summary}.
 
 %prep
-%setup -q
+%autosetup -p1
 
 %build
 mkdir -p %{_target_platform}
