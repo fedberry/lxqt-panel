@@ -1,10 +1,11 @@
 Name:    lxqt-panel
 Summary: Main panel bar for LXQt desktop suite
 Version: 0.11.1
-Release: 5%{?dist}
+Release: 6%{?dist}
 License: LGPLv2+
 URL:     http://lxqt.org/
 Source0: http://downloads.lxqt.org/lxqt/%{version}/%{name}-%{version}.tar.xz
+Source1: panel.conf
 Patch0: 0001-panel.conf.patch
 BuildRequires: pkgconfig(Qt5Help)
 BuildRequires: pkgconfig(Qt5Xdg) >= 1.0.0
@@ -70,13 +71,20 @@ for desktop in %{buildroot}/%{_datadir}/lxqt/lxqt-panel/*.desktop; do
     desktop-file-edit --remove-category=LXQt --remove-only-show-in=LXQt --add-only-show-in=X-LXQt ${desktop}
 done
 
+#try and work around annoying "floating menu bug"
+%{__install} -d %{buildroot}/%{_sysconfdir}/skel/.config/lxqt
+%{__install} -p -m 644 %{SOURCE1} %{buildroot}/%{_sysconfdir}/skel/.config/lxqt/
+
+
 %files
 %{_bindir}/lxqt-panel
 %dir %{_libdir}/lxqt-panel
 %{_libdir}/lxqt-panel/*.so
 %{_datadir}/lxqt
 %dir %{_sysconfdir}/xdg/lxqt
+%dir %{_sysconfdir}/skel/.config/lxqt
 %config(noreplace) %{_sysconfdir}/xdg/lxqt/panel.conf
+%config(noreplace) %{_sysconfdir}/skel/.config/lxqt/panel.conf
 %{_mandir}/man1/lxqt-panel*
 
 %files devel
@@ -84,6 +92,9 @@ done
 %{_includedir}/lxqt/*
 
 %changelog
+* Sun May 14 2017 Vaughan Agrez <devel at agrez dot net> - 0.11.1-6
+- Try to workaround "floating menu bug"
+
 * Thu Apr 27 2017 Vaughan Agrez <devel at agrez dot net> - 0.11.1-5
 - Update panel defaults (Patch0)
 - Use %autosetup
