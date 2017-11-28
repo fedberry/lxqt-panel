@@ -7,6 +7,7 @@ URL:     http://lxqt.org/
 Source0: http://downloads.lxqt.org/lxqt/%{version}/%{name}-%{version}.tar.xz
 Source1: panel.conf
 Patch0: 0001-panel.conf.patch
+Patch1: lxqt-panel-undef-explicit.patch
 BuildRequires: pkgconfig(Qt5Help)
 BuildRequires: pkgconfig(Qt5Xdg) >= 1.0.0
 BuildRequires: pkgconfig(lxqt) >= 0.11.0
