@@ -4,7 +4,7 @@ Version: 0.11.1
 Release: 6%{?dist}
 License: LGPLv2+
 URL:     http://lxqt.org/
-Source0: http://downloads.lxqt.org/lxqt/%{version}/%{name}-%{version}.tar.xz
+Source0: https://github.com/lxde/lxqt-panel/releases/download/%{version}/%{name}-%{version}.tar.xz
 Source1: panel.conf
 Patch0: 0001-panel.conf.patch
 Patch1: lxqt-panel-undef-explicit.patch
