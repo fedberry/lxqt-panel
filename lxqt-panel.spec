@@ -1,7 +1,7 @@
 Name:    lxqt-panel
 Summary: Main panel bar for LXQt desktop suite
 Version: 0.11.1
-Release: 8%{?dist}
+Release: 9%{?dist}
 License: LGPLv2+
 URL:     http://lxqt.org/
 Source0: https://github.com/lxde/lxqt-panel/releases/download/%{version}/%{name}-%{version}.tar.xz
@@ -93,6 +93,9 @@ done
 %{_includedir}/lxqt/*
 
 %changelog
+* Fri Dec 01 2017 Vaughan Agrez <devel at agrez dot net> - 0.11.1-9
+- Set default web browser to firefox
+
 * Tue Nov 28 2017 Vaughan Agrez <devel at agrez dot net> - 0.11.1-8
 - Add patch for compiling against Qt 5.8
 - Update Source0 url
