@@ -31,7 +31,7 @@ index e833229..7751903
  type=quicklaunch
 +apps\1\desktop=/usr/share/applications/qterminal.desktop
 +apps\2\desktop=/usr/share/applications/pcmanfm-qt.desktop
-+apps\3\desktop=/usr/share/applications/firefox.desktop
++apps\3\desktop=/usr/share/applications/chromium-browser.desktop
 +apps\size=3
  alignment=Left
  
