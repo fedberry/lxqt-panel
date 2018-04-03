@@ -9,6 +9,7 @@ Source1: panel.conf
 Patch0: 0001-panel.conf.patch
 Patch1: lxqt-panel-undef-explicit.patch
 Patch2: lxqt-panel-set-default-mixer.patch
+Patch3: fix-incorrect-popup-menu-positions.patch
 BuildRequires: pkgconfig(Qt5Help)
 BuildRequires: pkgconfig(Qt5Xdg) >= 1.0.0
 BuildRequires: pkgconfig(lxqt) >= 0.11.0
@@ -73,10 +74,6 @@ for desktop in %{buildroot}/%{_datadir}/lxqt/lxqt-panel/*.desktop; do
     desktop-file-edit --remove-category=LXQt --remove-only-show-in=LXQt --add-only-show-in=X-LXQt ${desktop}
 done
 
-#try and work around annoying "floating menu bug"
-%{__install} -d %{buildroot}/%{_sysconfdir}/skel/.config/lxqt
-%{__install} -p -m 644 %{SOURCE1} %{buildroot}/%{_sysconfdir}/skel/.config/lxqt/
-
 
 %files
 %{_bindir}/lxqt-panel
@@ -84,9 +81,7 @@ done
 %{_libdir}/lxqt-panel/*.so
 %{_datadir}/lxqt
 %dir %{_sysconfdir}/xdg/lxqt
-%dir %{_sysconfdir}/skel/.config/lxqt
 %config(noreplace) %{_sysconfdir}/xdg/lxqt/panel.conf
-%config(noreplace) %{_sysconfdir}/skel/.config/lxqt/panel.conf
 %{_mandir}/man1/lxqt-panel*
 
 %files devel
