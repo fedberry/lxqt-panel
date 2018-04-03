@@ -1,7 +1,7 @@
 Name:    lxqt-panel
 Summary: Main panel bar for LXQt desktop suite
 Version: 0.11.1
-Release: 10%{?dist}
+Release: 11%{?dist}
 License: LGPLv2+
 URL:     http://lxqt.org/
 Source0: https://github.com/lxde/lxqt-panel/releases/download/%{version}/%{name}-%{version}.tar.xz
@@ -88,6 +88,10 @@ done
 %{_includedir}/lxqt/*
 
 %changelog
+* Mon Apr 02 2018 Vaughan Agrez <devel at agrez dot net> - 0.11.1-11
+- Add fix for incorrect popup menu positions (Patch3)
+- Update panel.conf patch
+
 * Sun Mar 25 2018 Vaughan Agrez <devel at agrez dot net> - 0.11.1-10
 - Set pavucontrol-qt as default pulseaudio mixer (Patch2)
 - Revert default web browser to chromium
