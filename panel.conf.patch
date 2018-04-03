@@ -1,0 +1,38 @@
+--- lxqt-panel-0.11.1.orig/panel/resources/panel.conf	2017-01-02 06:27:14.000000000 +0800
++++ lxqt-panel-0.11.1/panel/resources/panel.conf	2018-04-02 23:07:20.426681731 +0800
+@@ -1,11 +1,15 @@
+ panels=panel1
+ 
+ [panel1]
+-plugins=mainmenu,desktopswitch,quicklaunch,taskbar,tray,statusnotifier,mount,volume,clock,showdesktop
++iconSize=26
++panelSize=38
++plugins=mainmenu, quicklaunch, desktopswitch, taskbar, tray, statusnotifier, volume, clock
+ position=Bottom
+ desktop=0
+ 
+ [mainmenu]
++showText=true
++text=Menu
+ type=mainmenu
+ 
+ [desktopswitch]
+@@ -13,6 +17,10 @@
+ 
+ [quicklaunch]
+ type=quicklaunch
++apps\1\desktop=/usr/share/applications/qterminal.desktop
++apps\2\desktop=/usr/share/applications/pcmanfm-qt.desktop
++apps\3\desktop=/usr/share/applications/chromium-browser.desktop
++apps\size=3
+ alignment=Left
+ 
+ [taskbar]
+@@ -28,6 +36,7 @@
+ type=clock
+ 
+ [volume]
++audioEngine=Alsa
+ device=0
+ type=volume
+ 

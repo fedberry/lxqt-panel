@@ -5,8 +5,7 @@ Release: 10%{?dist}
 License: LGPLv2+
 URL:     http://lxqt.org/
 Source0: https://github.com/lxde/lxqt-panel/releases/download/%{version}/%{name}-%{version}.tar.xz
-Source1: panel.conf
-Patch0: 0001-panel.conf.patch
+Patch0: panel.conf.patch
 Patch1: lxqt-panel-undef-explicit.patch
 Patch2: lxqt-panel-set-default-mixer.patch
 Patch3: fix-incorrect-popup-menu-positions.patch
