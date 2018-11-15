@@ -1,14 +1,14 @@
 Name:    lxqt-panel
 Summary: Main panel bar for LXQt desktop suite
-Version: 0.11.1
-Release: 11%{?dist}
+Version: 0.13.0
+Release: 5%{?dist}
 License: LGPLv2+
 URL:     http://lxqt.org/
 Source0: https://github.com/lxde/lxqt-panel/releases/download/%{version}/%{name}-%{version}.tar.xz
 Patch0: panel.conf.patch
 BuildRequires: pkgconfig(Qt5Help)
 BuildRequires: pkgconfig(Qt5Xdg) >= 1.0.0
-BuildRequires: pkgconfig(lxqt) >= 0.11.0
+BuildRequires: pkgconfig(lxqt) >= 0.13.0
 BuildRequires: pkgconfig(lxqt-globalkeys)
 BuildRequires: pkgconfig(xcb)
 BuildRequires: pkgconfig(xcb-damage)
@@ -30,24 +30,31 @@ BuildRequires: kf5-kguiaddons-devel >= 5.5.0
 BuildRequires: kf5-solid-devel >= 5.5.0
 BuildRequires: desktop-file-utils
 BuildRequires: lm_sensors-devel
-Requires: lxqt-runner >= 0.11.0
-Requires: lxqt-common >= 0.11.0
+
+Requires: lxmenu-data
+Requires: lxqt-runner  >= 0.13.0
 Requires: xscreensaver-base
-Obsoletes: liblxqt-mount <= 0.10.0
+
+Obsoletes: liblxqt-mount
+
 
 %description
 %{summary}.
+
 
 %package devel
 Summary:  Developer files for %{name}
 Requires: %{name} = %{version}-%{release}
 Obsoletes: liblxqt-mount-devel <= 0.10.0
 
+
 %description devel
 %{summary}.
 
+
 %prep
 %autosetup -p1
+
 
 %build
 mkdir -p %{_target_platform}
@@ -61,6 +68,7 @@ pushd %{_target_platform}
 popd
 
 make %{?_smp_mflags} -C %{_target_platform}
+
 
 %install
 make install/fast DESTDIR=%{buildroot} -C %{_target_platform}
@@ -76,15 +84,25 @@ done
 %dir %{_libdir}/lxqt-panel
 %{_libdir}/lxqt-panel/*.so
 %{_datadir}/lxqt
-%dir %{_sysconfdir}/xdg/lxqt
-%config(noreplace) %{_sysconfdir}/xdg/lxqt/panel.conf
+%{_sysconfdir}/xdg/autostart/lxqt-panel.desktop
+%{_sysconfdir}/xdg/menus/lxqt-applications.menu
+%{_datadir}/desktop-directories/*.directory
 %{_mandir}/man1/lxqt-panel*
+
 
 %files devel
 %dir %{_includedir}/lxqt
 %{_includedir}/lxqt/*
 
+
 %changelog
+* Thu Nov 15 2018 Vaughan Agrez <devel at agrez dot net> - 0.13.0-5
+- New version
+- Bump release
+- Update BuildRequires & Requires
+- Drop patches 1,2 & 3
+- Refactor panel.conf patch
+
 * Mon Apr 02 2018 Vaughan Agrez <devel at agrez dot net> - 0.11.1-11
 - Add fix for incorrect popup menu positions (Patch3)
 - Update panel.conf patch
