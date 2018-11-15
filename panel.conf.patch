@@ -1,13 +1,13 @@
---- lxqt-panel-0.11.1.orig/panel/resources/panel.conf	2017-01-02 06:27:14.000000000 +0800
-+++ lxqt-panel-0.11.1/panel/resources/panel.conf	2018-04-02 23:07:20.426681731 +0800
+--- a/panel/resources/panel.conf.old	2018-05-22 03:24:34.000000000 +0800
++++ b/panel/resources/panel.conf	2018-11-11 19:38:49.454407778 +0800
 @@ -1,11 +1,15 @@
  panels=panel1
  
  [panel1]
--plugins=mainmenu,desktopswitch,quicklaunch,taskbar,tray,statusnotifier,mount,volume,clock,showdesktop
+-plugins=mainmenu,desktopswitch,quicklaunch,taskbar,tray,statusnotifier,mount,volume,worldclock,showdesktop
 +iconSize=26
 +panelSize=38
-+plugins=mainmenu, quicklaunch, desktopswitch, taskbar, tray, statusnotifier, volume, clock
++plugins=mainmenu, quicklaunch, desktopswitch, taskbar, tray, statusnotifier, volume, worldclock
  position=Bottom
  desktop=0
  
@@ -29,7 +29,7 @@
  
  [taskbar]
 @@ -28,6 +36,7 @@
- type=clock
+ type=worldclock
  
  [volume]
 +audioEngine=Alsa
