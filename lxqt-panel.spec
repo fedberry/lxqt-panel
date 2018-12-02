@@ -1,11 +1,13 @@
 Name:    lxqt-panel
 Summary: Main panel bar for LXQt desktop suite
 Version: 0.13.0
-Release: 5%{?dist}
+Release: 6%{?dist}
 License: LGPLv2+
 URL:     http://lxqt.org/
 Source0: https://github.com/lxde/lxqt-panel/releases/download/%{version}/%{name}-%{version}.tar.xz
 Patch0: panel.conf.patch
+Patch1: lxqt-panel-menu-redhat.patch
+
 BuildRequires: pkgconfig(Qt5Help)
 BuildRequires: pkgconfig(Qt5Xdg) >= 1.0.0
 BuildRequires: pkgconfig(lxqt) >= 0.13.0
@@ -91,6 +93,10 @@ make install/fast DESTDIR=%{buildroot} -C %{_target_platform}
 
 
 %changelog
+* Fri Nov 30 2018 Vaughan Agrez <devel at agrez dot net> - 0.13.0-6
+- Restore special RedHat submenus (Patch1)
+- Drop desktop file modifications
+
 * Thu Nov 15 2018 Vaughan Agrez <devel at agrez dot net> - 0.13.0-5
 - New version
 - Bump release
