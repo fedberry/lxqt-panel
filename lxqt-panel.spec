@@ -73,11 +73,6 @@ make %{?_smp_mflags} -C %{_target_platform}
 %install
 make install/fast DESTDIR=%{buildroot} -C %{_target_platform}
 
-for desktop in %{buildroot}/%{_datadir}/lxqt/lxqt-panel/*.desktop; do
-    # Exclude category as been Service 
-    desktop-file-edit --remove-category=LXQt --remove-only-show-in=LXQt --add-only-show-in=X-LXQt ${desktop}
-done
-
 
 %files
 %{_bindir}/lxqt-panel
